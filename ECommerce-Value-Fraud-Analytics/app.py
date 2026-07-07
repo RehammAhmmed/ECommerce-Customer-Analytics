@@ -11,7 +11,13 @@ st.title("📊 E-Commerce Customer Value & Satisfaction Dashboard")
 st.write("Welcome to the interactive business intelligence dashboard.")
 
 # الاتصال بقاعدة البيانات وسحب البيانات
-conn = sqlite3.connect('ecommerce_analytics.db')
+import os
+
+# تحديد مسار قاعدة البيانات الديناميكي لتجنب مشاكل الاستضافة
+current_dir = os.path.dirname(os.path.abspath(__file__))
+db_path = os.path.join(current_dir, 'ecommerce_analytics.db')
+
+conn = sqlite3.connect(db_path)
 df = pd.read_sql_query("SELECT * FROM customers_behavior", conn)
 conn.close()
 
